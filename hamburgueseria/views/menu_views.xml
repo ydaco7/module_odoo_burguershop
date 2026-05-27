@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_burger_root"
+              name="Hamburguesería"
+              sequence="50"/>
+
+    <menuitem id="menu_burger_orders"
+              name="Pedidos"
+              parent="menu_burger_root"
+              action="action_burger_order"
+              sequence="10"/>
+
+    <menuitem id="menu_burger_catalog"
+              name="Catálogo"
+              parent="menu_burger_root"
+              sequence="20"/>
+
+    <menuitem id="menu_burger_products"
+              name="Productos"
+              parent="menu_burger_catalog"
+              action="action_burger_product"
+              sequence="10"/>
+
+    <menuitem id="menu_burger_ingredients"
+              name="Ingredientes"
+              parent="menu_burger_catalog"
+              action="action_burger_ingredient"
+              sequence="20"/>
+
+    <menuitem id="menu_burger_reports"
+              name="Reportes"
+              parent="menu_burger_root"
+              sequence="30"/>
+
+    <menuitem id="menu_burger_sales_report"
+              name="Informe de Ventas"
+              parent="menu_burger_reports"
+              action="action_burger_sales_window"
+              sequence="10"/>
+</odoo>

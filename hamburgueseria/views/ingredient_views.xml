@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_burger_ingredient_tree" model="ir.ui.view">
+        <field name="name">burger.ingredient.tree</field>
+        <field name="model">burger.ingredient</field>
+        <field name="arch" type="xml">
+            <tree string="Ingredientes">
+                <field name="name"/>
+                <field name="ingredient_type"/>
+                <field name="extra_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_burger_ingredient_form" model="ir.ui.view">
+        <field name="name">burger.ingredient.form</field>
+        <field name="model">burger.ingredient</field>
+        <field name="arch" type="xml">
+            <form string="Ingrediente">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="ingredient_type"/>
+                        <field name="extra_price"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_burger_ingredient" model="ir.actions.act_window">
+        <field name="name">Ingredientes</field>
+        <field name="res_model">burger.ingredient</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_burger_order_tree" model="ir.ui.view">
+        <field name="name">burger.order.tree</field>
+        <field name="model">burger.order</field>
+        <field name="arch" type="xml">
+            <tree string="Pedidos"
+                  decoration-muted="state == 'draft'"
+                  decoration-info="state == 'waiting'"
+                  decoration-warning="state == 'preparing'"
+                  decoration-success="state in ('ready', 'delivered')"
+                  decoration-danger="state == 'returned'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date_order"/>
+                <field name="amount_total"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'waiting'"
+                       decoration-warning="state == 'preparing'"
+                       decoration-success="state in ('ready', 'delivered')"
+                       decoration-danger="state == 'returned'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_burger_order_form" model="ir.ui.view">
+        <field name="name">burger.order.form</field>
+        <field name="model">burger.order</field>
+        <field name="arch" type="xml">
+            <form string="Pedido">
+                <header>
+                    <button name="action_waiting" string="Confirmar Pedido"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_preparing" string="En Preparación"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'waiting')]}"/>
+                    <button name="action_ready" string="Listo"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'preparing')]}"/>
+                    <button name="action_delivered" string="Entregado"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'ready')]}"/>
+                    <button name="action_return" string="Devolver"
+                            type="object" class="btn-danger"
+                            attrs="{'invisible': [('state', 'in', ['draft', 'returned'])]}"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,waiting,preparing,ready,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Información del Pedido">
+                            <field name="partner_id"/>
+                            <field name="date_order"/>
+                        </group>
+                        <group string="Totales">
+                            <field name="amount_total"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Líneas de Pedido">
+                            <field name="order_line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price" readonly="1"/>
+                                    <field name="extra_ingredient_ids" widget="many2many_tags"/>
+                                    <field name="remove_ingredient_ids" widget="many2many_tags"/>
+                                    <field name="extra_cost" readonly="1"/>
+                                    <field name="subtotal" readonly="1"/>
+                                    <field name="notes"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Devolución"
+                              attrs="{'invisible': [('state', '!=', 'returned')]}">
+                            <group>
+                                <field name="return_reason" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Notas">
+                            <field name="notes" placeholder="Notas internas del pedido..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_burger_order_search" model="ir.ui.view">
+        <field name="name">burger.order.search</field>
+        <field name="model">burger.order</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Pedidos">
+                <field name="name" string="Número"/>
+                <field name="partner_id" string="Cliente"/>
+                <filter string="Borrador" name="draft"
+                        domain="[('state','=','draft')]"/>
+                <filter string="En Espera" name="waiting"
+                        domain="[('state','=','waiting')]"/>
+                <filter string="En Preparación" name="preparing"
+                        domain="[('state','=','preparing')]"/>
+                <filter string="Listos" name="ready"
+                        domain="[('state','=','ready')]"/>
+                <filter string="Entregados" name="delivered"
+                        domain="[('state','=','delivered')]"/>
+                <filter string="Devueltos" name="returned"
+                        domain="[('state','=','returned')]"/>
+                <separator/>
+                <filter string="Hoy" name="today"
+                        domain="[('date_order','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0,0)))]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Estado" name="by_state"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Cliente" name="by_partner"
+                            context="{'group_by': 'partner_id'}"/>
+                    <filter string="Fecha" name="by_date"
+                            context="{'group_by': 'date_order:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_burger_order" model="ir.actions.act_window">
+        <field name="name">Pedidos</field>
+        <field name="res_model">burger.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

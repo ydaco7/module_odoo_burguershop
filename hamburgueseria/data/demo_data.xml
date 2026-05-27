@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ingredientes base -->
+    <record id="ing_carne" model="burger.ingredient">
+        <field name="name">Carne de Res</field>
+        <field name="ingredient_type">base</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_pan" model="burger.ingredient">
+        <field name="name">Pan Brioche</field>
+        <field name="ingredient_type">base</field>
+        <field name="extra_price">0.0</field>
+    </record>
+
+    <!-- Vegetales -->
+    <record id="ing_lechuga" model="burger.ingredient">
+        <field name="name">Lechuga</field>
+        <field name="ingredient_type">vegetable</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_tomate" model="burger.ingredient">
+        <field name="name">Tomate</field>
+        <field name="ingredient_type">vegetable</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_cebolla" model="burger.ingredient">
+        <field name="name">Cebolla</field>
+        <field name="ingredient_type">vegetable</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_pepinillos" model="burger.ingredient">
+        <field name="name">Pepinillos</field>
+        <field name="ingredient_type">vegetable</field>
+        <field name="extra_price">0.0</field>
+    </record>
+
+    <!-- Extras con costo -->
+    <record id="ing_queso" model="burger.ingredient">
+        <field name="name">Queso Americano</field>
+        <field name="ingredient_type">extra</field>
+        <field name="extra_price">1.5</field>
+    </record>
+    <record id="ing_bacon" model="burger.ingredient">
+        <field name="name">Tocino</field>
+        <field name="ingredient_type">extra</field>
+        <field name="extra_price">2.0</field>
+    </record>
+    <record id="ing_aguacate" model="burger.ingredient">
+        <field name="name">Aguacate</field>
+        <field name="ingredient_type">extra</field>
+        <field name="extra_price">2.5</field>
+    </record>
+    <record id="ing_huevo" model="burger.ingredient">
+        <field name="name">Huevo Frito</field>
+        <field name="ingredient_type">extra</field>
+        <field name="extra_price">1.5</field>
+    </record>
+
+    <!-- Salsas -->
+    <record id="ing_ketchup" model="burger.ingredient">
+        <field name="name">Ketchup</field>
+        <field name="ingredient_type">sauce</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_mayo" model="burger.ingredient">
+        <field name="name">Mayonesa</field>
+        <field name="ingredient_type">sauce</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_mostaza" model="burger.ingredient">
+        <field name="name">Mostaza</field>
+        <field name="ingredient_type">sauce</field>
+        <field name="extra_price">0.0</field>
+    </record>
+    <record id="ing_bbq" model="burger.ingredient">
+        <field name="name">Salsa BBQ</field>
+        <field name="ingredient_type">sauce</field>
+        <field name="extra_price">0.5</field>
+    </record>
+
+    <!-- Hamburguesas -->
+    <record id="prod_clasica" model="burger.product">
+        <field name="name">Hamburguesa Clásica</field>
+        <field name="product_type">burger</field>
+        <field name="price">8.5</field>
+        <field name="description">Hamburguesa clásica con todos los ingredientes</field>
+        <field name="available_ingredient_ids" eval="[
+            (6, 0, [
+                ref('ing_carne'), ref('ing_pan'), ref('ing_lechuga'),
+                ref('ing_tomate'), ref('ing_cebolla'), ref('ing_pepinillos'),
+                ref('ing_queso'), ref('ing_bacon'), ref('ing_aguacate'),
+                ref('ing_ketchup'), ref('ing_mayo'), ref('ing_mostaza')
+            ])
+        ]"/>
+    </record>
+
+    <record id="prod_doble" model="burger.product">
+        <field name="name">Doble Burger</field>
+        <field name="product_type">burger</field>
+        <field name="price">12.0</field>
+        <field name="description">Doble carne con queso doble</field>
+        <field name="available_ingredient_ids" eval="[
+            (6, 0, [
+                ref('ing_carne'), ref('ing_pan'), ref('ing_lechuga'),
+                ref('ing_tomate'), ref('ing_cebolla'),
+                ref('ing_queso'), ref('ing_bacon'),
+                ref('ing_ketchup'), ref('ing_mayo'), ref('ing_bbq')
+            ])
+        ]"/>
+    </record>
+
+    <record id="prod_veggie" model="burger.product">
+        <field name="name">Veggie Burger</field>
+        <field name="product_type">burger</field>
+        <field name="price">9.0</field>
+        <field name="description">Hamburguesa vegetariana sin carne</field>
+        <field name="available_ingredient_ids" eval="[
+            (6, 0, [
+                ref('ing_pan'), ref('ing_lechuga'), ref('ing_tomate'),
+                ref('ing_cebolla'), ref('ing_aguacate'),
+                ref('ing_ketchup'), ref('ing_mayo')
+            ])
+        ]"/>
+    </record>
+
+    <record id="prod_bbq" model="burger.product">
+        <field name="name">BBQ Burger</field>
+        <field name="product_type">burger</field>
+        <field name="price">10.5</field>
+        <field name="description">Hamburguesa con salsa BBQ y tocino</field>
+        <field name="available_ingredient_ids" eval="[
+            (6, 0, [
+                ref('ing_carne'), ref('ing_pan'), ref('ing_lechuga'),
+                ref('ing_cebolla'), ref('ing_queso'), ref('ing_bacon'),
+                ref('ing_bbq'), ref('ing_mayo')
+            ])
+        ]"/>
+    </record>
+
+    <!-- Bebidas -->
+    <record id="prod_cola" model="burger.product">
+        <field name="name">Refresco Cola</field>
+        <field name="product_type">drink</field>
+        <field name="price">2.5</field>
+    </record>
+    <record id="prod_agua" model="burger.product">
+        <field name="name">Agua Mineral</field>
+        <field name="product_type">drink</field>
+        <field name="price">1.5</field>
+    </record>
+    <record id="prod_jugo" model="burger.product">
+        <field name="name">Jugo Natural</field>
+        <field name="product_type">drink</field>
+        <field name="price">3.0</field>
+    </record>
+    <record id="prod_limonada" model="burger.product">
+        <field name="name">Limonada</field>
+        <field name="product_type">drink</field>
+        <field name="price">2.0</field>
+    </record>
+
+    <!-- Acompañamientos -->
+    <record id="prod_papas" model="burger.product">
+        <field name="name">Papas Fritas</field>
+        <field name="product_type">side</field>
+        <field name="price">3.5</field>
+    </record>
+    <record id="prod_aros" model="burger.product">
+        <field name="name">Aros de Cebolla</field>
+        <field name="product_type">side</field>
+        <field name="price">4.0</field>
+    </record>
+    <record id="prod_nuggets" model="burger.product">
+        <field name="name">Nuggets x6</field>
+        <field name="product_type">side</field>
+        <field name="price">4.5</field>
+    </record>
+</odoo>

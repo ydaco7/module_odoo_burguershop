@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_burger_ingredient_user,burger.ingredient.user,model_burger_ingredient,base.group_user,1,0,0,0
+access_burger_ingredient_admin,burger.ingredient.admin,model_burger_ingredient,hamburgueseria.group_burger_admin,1,1,1,1
+access_burger_ingredient_employee,burger.ingredient.employee,model_burger_ingredient,hamburgueseria.group_burger_employee,1,1,0,0
+access_burger_product_user,burger.product.user,model_burger_product,base.group_user,1,0,0,0
+access_burger_product_admin,burger.product.admin,model_burger_product,hamburgueseria.group_burger_admin,1,1,1,1
+access_burger_product_employee,burger.product.employee,model_burger_product,hamburgueseria.group_burger_employee,1,0,0,0
+access_burger_order_user,burger.order.user,model_burger_order,base.group_user,1,1,1,0
+access_burger_order_admin,burger.order.admin,model_burger_order,hamburgueseria.group_burger_admin,1,1,1,1
+access_burger_order_employee,burger.order.employee,model_burger_order,hamburgueseria.group_burger_employee,1,1,1,0
+access_burger_order_line_user,burger.order.line.user,model_burger_order_line,base.group_user,1,1,1,1
+access_burger_order_line_admin,burger.order.line.admin,model_burger_order_line,hamburgueseria.group_burger_admin,1,1,1,1
+access_burger_order_line_employee,burger.order.line.employee,model_burger_order_line,hamburgueseria.group_burger_employee,1,1,1,1
+access_burger_return_wizard_all,burger.return.wizard.all,model_burger_return_wizard,,1,1,1,1

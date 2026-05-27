@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_burger_return_wizard_form" model="ir.ui.view">
+        <field name="name">burger.return.wizard.form</field>
+        <field name="model">burger.return.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Gestionar Devolución">
+                <group>
+                    <field name="order_id" readonly="1"/>
+                    <field name="return_date"/>
+                    <field name="reason"
+                           placeholder="Especifique el motivo de la devolución..."
+                           nolabel="1"
+                           colspan="2"/>
+                </group>
+                <footer>
+                    <button name="action_confirm_return" string="Confirmar Devolución"
+                            type="object" class="btn-danger"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

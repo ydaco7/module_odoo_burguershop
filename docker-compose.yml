@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:14
+    container_name: hamburguesas_db
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U odoo" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  odoo:
+    image: odoo:16
+    container_name: hamburguesas_odoo
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./hamburgueseria:/mnt/extra-addons/hamburgueseria
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  odoo_data:

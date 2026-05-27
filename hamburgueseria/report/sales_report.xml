@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Acción de ventana para el menú (muestra pedidos entregados) -->
+    <record id="action_burger_sales_window" model="ir.actions.act_window">
+        <field name="name">Informe de Ventas</field>
+        <field name="res_model">burger.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'delivered')]</field>
+        <field name="context">{'search_default_delivered': 1}</field>
+    </record>
+
+    <!-- Acción de impresión PDF (QWeb) -->
+    <record id="action_report_burger_order" model="ir.actions.report">
+        <field name="name">Recibo de Pedido</field>
+        <field name="model">burger.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hamburgueseria.report_burger_order_template</field>
+        <field name="report_file">hamburgueseria.report_burger_order_template</field>
+        <field name="binding_model_id" ref="model_burger_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
