@@ -18,7 +18,7 @@
 ## Arquitectura del Módulo
 
 ```
-hamburguesas_yadiel/
+hamburguesas/
 ├── __init__.py
 ├── __manifest__.py
 ├── models/
@@ -110,8 +110,8 @@ hamburguesas_yadiel/
 ### Fase 5 — Seguridad y Permisos
 **Objetivo:** Restringir acceso por rol de usuario.
 
-- Grupo `hamburguesas_yadiel.group_burger_admin` (Administrador)
-- Grupo `hamburguesas_yadiel.group_burger_employee` (Empleado)
+- Grupo `hamburguesas.group_burger_admin` (Administrador)
+- Grupo `hamburguesas.group_burger_employee` (Empleado)
 - Reglas en `ir.model.access.csv`:
   - Empleado: crear/leer/editar pedidos, no puede eliminar
   - Admin: acceso total incluido eliminación y reportes
@@ -138,7 +138,7 @@ hamburguesas_yadiel/
 ```bash
 # Clonar repositorio
 git clone <url-repo>
-cd hamburguesas_yadiel_odoo
+cd hamburguesas_odoo
 
 # Levantar servicios
 docker compose up -d
@@ -147,7 +147,7 @@ docker compose up -d
 # http://localhost:8069
 # Usuario: admin | Contraseña: admin
 
-# Instalar el módulo desde Ajustes > Aplicaciones > hamburguesas_yadiel
+# Instalar el módulo desde Ajustes > Aplicaciones > hamburguesas
 ```
 
 ---
